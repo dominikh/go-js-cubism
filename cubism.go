@@ -99,8 +99,8 @@ func (c *Context) Constant(value float64) *Metric {
 
 func (c *Context) NewMetric(req Request, name string) *Metric {
 	ret := c.Call("metric", func(start, stop js.Object, step int, cb js.Object) {
-		tStart := util.Time(start)
-		tStop := util.Time(stop)
+		tStart := start.Interface().(time.Time)
+		tStop := stop.Interface().(time.Time)
 		dStep := time.Duration(step) * time.Millisecond
 		req.Request(tStart, tStop, dStep, cb)
 	}, name)
@@ -241,7 +241,7 @@ func (c *Context) AddListener(typ string, fn func(...interface{})) {
 	switch actualType {
 	case "change", "beforechange", "prepare":
 		cb = func(start, stop js.Object) {
-			fn(util.Time(start), util.Time(stop))
+			fn(start.Interface().(time.Time), stop.Interface().(time.Time))
 		}
 	case "focus":
 		// FIXME what about the case of a null index?
@@ -330,7 +330,7 @@ func (m *Metric) AddListener(typ string, fn func(...interface{})) {
 	switch actualType {
 	case "change":
 		cb = func(start, stop js.Object) {
-			fn(util.Time(start), util.Time(stop))
+			fn(start.Interface().(time.Time), stop.Interface().(time.Time))
 		}
 	default:
 		panic("unsupported event type " + typ)
