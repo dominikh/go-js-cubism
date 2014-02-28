@@ -4,7 +4,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/neelance/gopherjs/js"
+	"github.com/gopherjs/gopherjs/js"
 	"honnef.co/go/js/d3"
 	"honnef.co/go/js/d3/scale"
 	"honnef.co/go/js/util"
