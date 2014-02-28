@@ -11,7 +11,7 @@ import (
 )
 
 func Version() string {
-	return js.Global("cubism").Get("version").String()
+	return js.Global.Get("cubism").Get("version").String()
 }
 
 type Context struct {
@@ -19,7 +19,7 @@ type Context struct {
 }
 
 func NewContext() *Context {
-	return &Context{js.Global("cubism").Call("context")}
+	return &Context{js.Global.Get("cubism").Call("context")}
 }
 
 func (c *Context) Step() time.Duration {
