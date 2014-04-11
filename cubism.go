@@ -11,7 +11,7 @@ import (
 )
 
 func Version() string {
-	return js.Global.Get("cubism").Get("version").String()
+	return js.Global.Get("cubism").Get("version").Str()
 }
 
 type Context struct {
@@ -74,7 +74,7 @@ func (g *Graphite) Find(pattern string, cb func(results []string, err error)) {
 }
 
 func (g *Graphite) URL() string {
-	return g.Call("toString").String()
+	return g.Call("toString").Str()
 }
 
 type Cube struct {
@@ -179,7 +179,7 @@ func (co *Comparison) SetTitle(title string) {
 }
 
 func (co *Comparison) Title() string {
-	return co.Call("title").String()
+	return co.Call("title").Str()
 }
 
 func (co *Comparison) SetPrimaryFormat(format d3.Formatter) {
@@ -189,7 +189,7 @@ func (co *Comparison) SetPrimaryFormat(format d3.Formatter) {
 func (co *Comparison) PrimaryFormat() d3.Formatter {
 	// TODO document that calling this will give us a new function
 	f := co.Call("formatPrimary")
-	return func(o js.Object) string { return f.Invoke(o).String() }
+	return func(o js.Object) string { return f.Invoke(o).Str() }
 }
 
 func (co *Comparison) SetChangeFormat(format d3.Formatter) {
@@ -199,7 +199,7 @@ func (co *Comparison) SetChangeFormat(format d3.Formatter) {
 func (co *Comparison) ChangeFormat() d3.Formatter {
 	// TODO document that calling this will give us a new function
 	f := co.Call("formatChange")
-	return func(o js.Object) string { return f.Invoke(o).String() }
+	return func(o js.Object) string { return f.Invoke(o).Str() }
 }
 
 func (co *Comparison) SetColors(colors []string) {
@@ -273,7 +273,7 @@ func (cu *Cube) Metric(expr string) *Metric {
 }
 
 func (cu *Cube) URL() string {
-	return cu.Call("toString").String()
+	return cu.Call("toString").Str()
 }
 
 func (l *Librato) Metric(name, source string) *Metric {
@@ -351,7 +351,7 @@ func (m *Metric) Context() *Context {
 }
 
 func (m *Metric) String() string {
-	return m.Call("toString").String()
+	return m.Call("toString").Str()
 }
 
 func (m *Metric) Underlying() js.Object {
@@ -367,7 +367,7 @@ func (a *Axis) SetOrientation(orientation string) {
 }
 
 func (a *Axis) Orientation() string {
-	return a.Call("orient").String()
+	return a.Call("orient").Str()
 }
 
 func (a *Axis) SetTicks(args ...interface{}) {
@@ -412,7 +412,7 @@ func (a *Axis) SetTickFormat(f d3.Formatter) {
 func (a *Axis) TickFormat() d3.Formatter {
 	// TODO document that calling this will give us a new function
 	f := a.Call("tickFormat")
-	return func(o js.Object) string { return f.Invoke(o).String() }
+	return func(o js.Object) string { return f.Invoke(o).Str() }
 }
 
 func (a *Axis) Remove(sel d3.Selection) {
@@ -456,7 +456,7 @@ func (h *Horizon) SetMode(mode string) {
 }
 
 func (h *Horizon) Mode() string {
-	return h.Call("mode").String()
+	return h.Call("mode").Str()
 }
 
 func (h *Horizon) SetHeight(height int) {
@@ -499,7 +499,7 @@ func (h *Horizon) SetTitle(title string) {
 }
 
 func (h *Horizon) Title() string {
-	return h.Call("title").String()
+	return h.Call("title").Str()
 }
 
 func (h *Horizon) SetFormat(format d3.Formatter) {
@@ -508,7 +508,7 @@ func (h *Horizon) SetFormat(format d3.Formatter) {
 
 func (h *Horizon) Format() d3.Formatter {
 	f := h.Call("tickFormat")
-	return func(o js.Object) string { return f.Invoke(o).String() }
+	return func(o js.Object) string { return f.Invoke(o).Str() }
 }
 
 func (h *Horizon) SetColors(colors []string) {
